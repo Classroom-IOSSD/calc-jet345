@@ -7,6 +7,7 @@ int main(){
 	char operator = ' ';
 	float result;
 	int line = 0;
+	double (*function_pointer)(int,int);
 
 	fp = fopen("read.txt","r");
 	if(fp!=NULL){
@@ -16,18 +17,23 @@ int main(){
 			fscanf(fp, "%d %c %d",&operand1, &operator, &operand2);
 			switch(operator) {
 				case '+':
-				result = add(operand1, operand2);
+				//result = add(operand1, operand2);
+				function_pointer=add;
 				break;
 				case '-':
-				result = minus(operand1, operand2);
+				//result = minus(operand1, operand2);
+				function_pointer=minus;
 				break;
 				case '*':
-				result = mul(operand1,operand2);
+				//result = mul(operand1,operand2);
+				function_pointer=mul;
 				break;
 				case '/':
-				result = div(operand1, operand2);
+				//result = div(operand1, operand2);
+				function_pointer=div;
 				break;
-			}		
+			}
+			result = function_pointer(operand1,operand2);		
 			printf("%d %c %d = %f\n",
 				 operand1, operator, operand2, result);
 		}
